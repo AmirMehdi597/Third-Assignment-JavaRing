@@ -1,19 +1,20 @@
 package org.project.object.weapons;
 
 import org.project.entity.Entity;
+import org.project.object.Object;
 
-// TODO: UPDATE IMPLEMENTATION
-public abstract class Weapon {
+public class Weapon implements Object {
     private int damage;
     private int manaCost;
+    private String name;
+    private int health;
 
-    /*
-    TODO: ADD OTHER REQUIRED AND BONUS ATTRIBUTES
-    */
-
-    public Weapon(int damage, int manaCost) {
+    public Weapon(int damage, String weaponName, int manaCost) {
         this.damage = damage;
         this.manaCost = manaCost;
+    }
+
+    public Weapon(int damage, int manaCost, String name, int health, int abilityCharge) {
     }
 
     @Override
@@ -21,15 +22,24 @@ public abstract class Weapon {
         target.takeDamage(damage);
     }
 
+    @Override
+    public void heal(Entity target) {
+
+    }
+
+    @Override
+    public boolean ArmorBreak() {
+        return false;
+    }
+
     public int getDamage() {
-        return damage;
+        int health = this.health;
+        int damage = this.damage;
+        return health - damage;
     }
 
     public int getManaCost() {
         return manaCost;
     }
 
-    /*
-    TODO: ADD OTHER REQUIRED AND BONUS METHODS
-    */
 }

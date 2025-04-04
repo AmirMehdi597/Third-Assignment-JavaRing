@@ -1,20 +1,38 @@
-package org.project.entity.enemies;
+package org.project.entity.players;
 
 import org.project.entity.Entity;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
 
-public class Skeleton extends Enemy {
-    Weapon weapon;
+public class Wizzard implements Entity {
+    private String name;
+    private Weapon weapon;
+    private Armor armor;
     private int hp;
+    private int maxHP;
     private int mp;
-    Armor armor;
-    public Skeleton(int hp, int mp, Weapon weapon) {
-        super(hp, mp, weapon);
+    private int maxMP;
+    private int manaCost;
+
+    public Wizzard(String name, int hp, int mp, String weaponName, int weaponDamage, String armorName, int armorDefense , int manaCost) {
+        this.name = name;
+        this.hp = hp;
+        this.maxHP = hp;
+        this.mp = mp;
+        this.maxMP = mp;
+        this.weapon = new Weapon(weaponDamage, weaponName , manaCost);
+        this.armor = new Armor(armorName, armorDefense);
+    }
+
+
+    @Override
+    public void attack(Entity target) {
+        target.takeDamage(weapon.getDamage());
+        System.out.println("Attacking Enemy");
     }
 
     @Override
-    public void defend(){
+    public void defend() {
         int defenseBonus = armor.getDefense();
         int damageReduction = defenseBonus / 2;
         int totalDamage = 10;
@@ -25,38 +43,43 @@ public class Skeleton extends Enemy {
         this.takeDamage(reducedDamage);
     }
 
-    void takedamage(int damage) {
-        super.takeDamage(damage);
-    }
-
-
-    @Override
-    public void attack(Entity target) {
-        target.takeDamage(weapon.getDamage());
-        System.out.println("Attacking Skeleton");
-    }
-
     public int health(int damage) {
         return hp - damage;
     }
 
     @Override
+    public void takeDamage(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+        System.out.println("Wizzard Take damage");
+    }
+
+    @Override
     public void heal(int health) {
-     health = health + 1;
+        hp += health;
+        if (hp > maxHP) {
+            hp = maxHP;
+        }
     }
 
     @Override
     public void fillMana(int mana) {
-
+        mp += mana;
+        if (mp > maxMP) {
+            mp = maxMP;
+        }
     }
 
     @Override
     public int getMaxHP() {
-        return 0;
+        return maxHP;
     }
+
     @Override
     public int getMaxMP() {
-        return 0;
+        return maxMP;
     }
 
     @Override
@@ -84,11 +107,23 @@ public class Skeleton extends Enemy {
 
     }
 
-    private class fear{
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    private class lightning {
         private String name;
         private int damage;
 
-        public fear(String name, int damage) {
+        public lightning(String name, int damage) {
             this.name = name;
             this.damage = damage;
         }
@@ -120,3 +155,5 @@ public class Skeleton extends Enemy {
         }
     }
 }
+
+

@@ -4,12 +4,13 @@ import org.project.entity.Entity;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
 
-public class Skeleton extends Enemy {
+public class Goblin extends Enemy{
     Weapon weapon;
     private int hp;
     private int mp;
     Armor armor;
-    public Skeleton(int hp, int mp, Weapon weapon) {
+
+    public Goblin(int hp, int mp, Weapon weapon) {
         super(hp, mp, weapon);
     }
 
@@ -29,20 +30,19 @@ public class Skeleton extends Enemy {
         super.takeDamage(damage);
     }
 
-
-    @Override
-    public void attack(Entity target) {
-        target.takeDamage(weapon.getDamage());
-        System.out.println("Attacking Skeleton");
-    }
-
     public int health(int damage) {
         return hp - damage;
     }
 
     @Override
+    public void attack(Entity target) {
+        target.takeDamage(weapon.getDamage());
+        System.out.println("Attacking player");
+    }
+
+    @Override
     public void heal(int health) {
-     health = health + 1;
+        health = health + 1;
     }
 
     @Override
@@ -84,11 +84,11 @@ public class Skeleton extends Enemy {
 
     }
 
-    private class fear{
+    private class horror{
         private String name;
         private int damage;
 
-        public fear(String name, int damage) {
+        public horror(String name, int damage) {
             this.name = name;
             this.damage = damage;
         }
