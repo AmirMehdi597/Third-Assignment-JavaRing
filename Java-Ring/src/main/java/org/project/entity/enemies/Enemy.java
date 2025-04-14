@@ -6,11 +6,9 @@ import org.project.object.weapons.Weapon;
 
 public abstract class Enemy implements Entity {
     Weapon weapon;
-    private int hp;
     private int mp;
     Armor armor;
     public Enemy(int hp, int mp, Weapon weapon) {
-        this.hp = hp;
         this.mp = mp;
 
         this.weapon = weapon;
@@ -19,12 +17,10 @@ public abstract class Enemy implements Entity {
     public void takeDamage(int damage) {
         int finalDamage = damage - this.getDefense();
         if (finalDamage < 0) finalDamage = 0;
-        hp -= finalDamage;
-        if (hp < 0) hp = 0;
     }
 
     public int getHp() {
-        return hp;
+        return 0;
     }
 
     public int getMp() {
