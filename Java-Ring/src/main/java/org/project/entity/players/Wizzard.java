@@ -28,7 +28,6 @@ public class Wizzard implements Entity {
     @Override
     public void attack(Entity target) {
         target.takeDamage(weapon.getDamage());
-        System.out.println("Attacking Enemy");
     }
 
     @Override
@@ -53,7 +52,6 @@ public class Wizzard implements Entity {
         if (hp < 0) {
             hp = 0;
         }
-        System.out.println("Wizzard Take damage");
     }
 
     @Override
