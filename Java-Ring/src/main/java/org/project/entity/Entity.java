@@ -15,7 +15,15 @@ public interface Entity {
 
     int getMaxMP();
 
-    /*
-    TODO: ADD OTHER REQUIRED AND BONUS METHODS
-    */
+    int getHealth();
+
+
+    void setHealth(int i);
+
+    int getDefense();
+
+    void setDefence(int i);
+
+    void setDefense(int i);
+
 }

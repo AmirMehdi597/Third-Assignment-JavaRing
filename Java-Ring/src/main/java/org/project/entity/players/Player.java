@@ -4,19 +4,16 @@ import org.project.entity.Entity;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
 
-// TODO: UPDATE IMPLEMENTATION
-public abstract class Player {
+public abstract class Player implements Entity {
     protected String name;
     Weapon weapon;
     Armor armor;
-    private int hp;
     private int maxHP;
     private int mp;
     private int maxMP;
 
     public Player(String name, int hp, int mp, Weapon weapon, Armor armor) {
         this.name = name;
-        this.hp = hp;
         this.mp = mp;
 
         this.weapon = weapon;
@@ -30,21 +27,26 @@ public abstract class Player {
 
     @Override
     public void defend() {
-        // TODO: (BONUS) IMPLEMENT A DEFENSE METHOD FOR SHIELDS
+        int defenseBonus = armor.getDefense();
+        int damageReduction = defenseBonus / 2;
+
+        int totalDamage = 10;
+
+        int reducedDamage = totalDamage - damageReduction;
+        if (reducedDamage < 0) {
+            reducedDamage = 0;
+        }
+        this.takeDamage(reducedDamage);
     }
 
-    // TODO: (BONUS) UPDATE THE FORMULA OF TAKING DAMAGE
     @Override
     public void takeDamage(int damage) {
-        hp -= damage - armor.getDefense();
+
     }
 
     @Override
     public void heal(int health) {
-        hp += health;
-        if (hp > maxHP) {
-            hp = maxHP;
-        }
+
     }
 
     @Override
@@ -61,7 +63,7 @@ public abstract class Player {
     }
 
     public int getHp() {
-        return hp;
+        return 0;
     }
 
     @Override
@@ -85,5 +87,4 @@ public abstract class Player {
     public Armor getArmor() {
         return armor;
     }
-
 }
